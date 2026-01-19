@@ -1,6 +1,5 @@
 package id.pariwisata.jelajahbandung.dto;
 
-import id.pariwisata.jelajahbandung.model.Wisata;
 import lombok.Builder;
 import lombok.Data;
 
@@ -16,18 +15,8 @@ public class WisataResponse {
     private String urlGambar;
     private Double latitude;
     private Double longitude;
-
-    public static WisataResponse fromEntity(Wisata wisata) {
-        return WisataResponse.builder()
-                .id(wisata.getId())
-                .nama(wisata.getNama())
-                .deskripsi(wisata.getDeskripsi())
-                .alamat(wisata.getAlamat())
-                .jamBuka(wisata.getJamBuka())
-                .hargaTiket(wisata.getHargaTiket())
-                .urlGambar(wisata.getUrlGambar())
-                .latitude(wisata.getLatitude())
-                .longitude(wisata.getLongitude())
-                .build();
-    }
+    private Long kategoriId;
+    private String kategoriNama;
+    private java.time.LocalDateTime createdAt;
+    private java.time.LocalDateTime updatedAt;
 }

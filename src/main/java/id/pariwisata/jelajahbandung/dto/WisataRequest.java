@@ -31,4 +31,7 @@ public class WisataRequest {
 
     @NotNull(message = "Longitude cannot be null")
     private Double longitude;
+
+    @NotNull(message = "Kategori ID cannot be null")
+    private Long kategoriId;
 }

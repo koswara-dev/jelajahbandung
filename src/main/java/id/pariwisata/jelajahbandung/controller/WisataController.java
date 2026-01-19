@@ -1,6 +1,7 @@
 package id.pariwisata.jelajahbandung.controller;
 
 import id.pariwisata.jelajahbandung.dto.ApiResponse;
+import id.pariwisata.jelajahbandung.dto.PagedResponse;
 import id.pariwisata.jelajahbandung.dto.WisataRequest;
 import id.pariwisata.jelajahbandung.dto.WisataResponse;
 import id.pariwisata.jelajahbandung.service.WisataService;
@@ -8,8 +9,6 @@ import lombok.RequiredArgsConstructor;
 import jakarta.validation.Valid;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.List;
 
 @RestController
 @RequestMapping("/api/v1/wisata")
@@ -19,9 +18,14 @@ public class WisataController {
     private final WisataService wisataService;
 
     @GetMapping
-    public ResponseEntity<ApiResponse<List<WisataResponse>>> getAllWisata(@RequestParam(required = false) String nama) {
+    public ResponseEntity<ApiResponse<PagedResponse<WisataResponse>>> getAllWisata(
+            @RequestParam(required = false) String nama,
+            @RequestParam(required = false) Long kategoriId,
+            @RequestParam(defaultValue = "0") int page,
+            @RequestParam(defaultValue = "10") int size) {
         return ResponseEntity
-                .ok(ApiResponse.success("Data wisata successfully collected", wisataService.getAllWisata(nama)));
+                .ok(ApiResponse.success("Data wisata successfully collected",
+                        wisataService.getAllWisata(nama, kategoriId, page, size)));
     }
 
     @GetMapping("/{id}")

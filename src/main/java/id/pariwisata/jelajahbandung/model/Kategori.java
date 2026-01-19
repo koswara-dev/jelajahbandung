@@ -15,28 +15,17 @@ import java.time.LocalDateTime;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-@Table(name = "wisata")
-public class Wisata {
+@Table(name = "kategori")
+public class Kategori {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(nullable = false)
+    @Column(nullable = false, unique = true)
     private String nama;
 
     @Column(columnDefinition = "TEXT")
     private String deskripsi;
-
-    private String alamat;
-    private String jamBuka;
-    private Double hargaTiket;
-    private String urlGambar;
-    private Double latitude;
-    private Double longitude;
-
-    @ManyToOne
-    @JoinColumn(name = "kategori_id")
-    private Kategori kategori;
 
     @CreationTimestamp
     @Column(updatable = false)
