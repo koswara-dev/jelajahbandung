@@ -27,6 +27,8 @@ public class Kategori {
     @Column(columnDefinition = "TEXT")
     private String deskripsi;
 
+    private String urlGambar;
+
     @CreationTimestamp
     @Column(updatable = false)
     private LocalDateTime createdAt;

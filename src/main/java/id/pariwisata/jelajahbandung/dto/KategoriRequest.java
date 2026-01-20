@@ -9,4 +9,5 @@ public class KategoriRequest {
     private String nama;
 
     private String deskripsi;
+    private String urlGambar;
 }

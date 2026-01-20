@@ -12,6 +12,7 @@ public class KategoriResponse {
     private Long id;
     private String nama;
     private String deskripsi;
+    private String urlGambar;
     private LocalDateTime createdAt;
     private LocalDateTime updatedAt;
 
@@ -20,6 +21,7 @@ public class KategoriResponse {
                 .id(kategori.getId())
                 .nama(kategori.getNama())
                 .deskripsi(kategori.getDeskripsi())
+                .urlGambar(kategori.getUrlGambar())
                 .createdAt(kategori.getCreatedAt())
                 .updatedAt(kategori.getUpdatedAt())
                 .build();

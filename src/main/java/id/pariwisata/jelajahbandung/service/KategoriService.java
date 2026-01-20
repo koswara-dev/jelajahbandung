@@ -32,6 +32,7 @@ public class KategoriService {
         Kategori kategori = Kategori.builder()
                 .nama(request.getNama())
                 .deskripsi(request.getDeskripsi())
+                .urlGambar(request.getUrlGambar())
                 .build();
 
         Kategori savedKategori = kategoriRepository.save(kategori);
@@ -44,6 +45,7 @@ public class KategoriService {
 
         kategori.setNama(request.getNama());
         kategori.setDeskripsi(request.getDeskripsi());
+        kategori.setUrlGambar(request.getUrlGambar());
 
         Kategori updatedKategori = kategoriRepository.save(kategori);
         return KategoriResponse.fromEntity(updatedKategori);
