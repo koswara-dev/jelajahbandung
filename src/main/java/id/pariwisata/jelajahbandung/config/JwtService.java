@@ -21,7 +21,7 @@ public class JwtService {
     // AES-256 key
     private static final String SECRET_KEY = "404E635266556A586E3272357538782F413F4428472B4B6250645367566B5970";
 
-    public String extractUsername(String token) {
+    public String extractUserId(String token) {
         return extractClaim(token, Claims::getSubject);
     }
 
@@ -32,16 +32,19 @@ public class JwtService {
 
     public String generateToken(UserDetails userDetails) {
         HashMap<String, Object> extraClaims = new HashMap<>();
+        String userId = "";
         if (userDetails instanceof id.pariwisata.jelajahbandung.model.User) {
-            extraClaims.put("role", ((id.pariwisata.jelajahbandung.model.User) userDetails).getRole());
+            id.pariwisata.jelajahbandung.model.User user = (id.pariwisata.jelajahbandung.model.User) userDetails;
+            extraClaims.put("role", user.getRole());
+            userId = String.valueOf(user.getId());
         }
-        return generateToken(extraClaims, userDetails);
+        return generateToken(extraClaims, userId, userDetails);
     }
 
-    public String generateToken(Map<String, Object> extraClaims, UserDetails userDetails) {
+    public String generateToken(Map<String, Object> extraClaims, String userId, UserDetails userDetails) {
         return Jwts.builder()
                 .setClaims(extraClaims)
-                .setSubject(userDetails.getUsername())
+                .setSubject(userId)
                 .setIssuedAt(new Date(System.currentTimeMillis()))
                 .setExpiration(new Date(System.currentTimeMillis() + 1000 * 60 * 60 * 24)) // 24 hours
                 .signWith(getSignInKey(), SignatureAlgorithm.HS256)
@@ -49,8 +52,12 @@ public class JwtService {
     }
 
     public boolean isTokenValid(String token, UserDetails userDetails) {
-        final String username = extractUsername(token);
-        return (username.equals(userDetails.getUsername())) && !isTokenExpired(token);
+        final String userIdStr = extractUserId(token);
+        if (userDetails instanceof id.pariwisata.jelajahbandung.model.User) {
+            Long userId = ((id.pariwisata.jelajahbandung.model.User) userDetails).getId();
+            return (userIdStr.equals(String.valueOf(userId))) && !isTokenExpired(token);
+        }
+        return false;
     }
 
     private boolean isTokenExpired(String token) {
