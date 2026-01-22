@@ -67,13 +67,23 @@ The application will start on port `8080`.
 
 #### Tourism Spots (Wisata)
 
-| Method   | Endpoint       | Description                    | Request Param                      | Request Body         |
-| :------- | :------------- | :----------------------------- | :--------------------------------- | :------------------- |
-| `GET`    | `/wisata`      | Get all tourism spots          | `nama` (optional) - Filter by name | N/A                  |
-| `GET`    | `/wisata/{id}` | Get details of a specific spot | N/A                                | N/A                  |
-| `POST`   | `/wisata`      | Create a new tourism spot      | N/A                                | `WisataRequest` JSON |
-| `PUT`    | `/wisata/{id}` | Update an existing spot        | N/A                                | `WisataRequest` JSON |
-| `DELETE` | `/wisata/{id}` | Delete a tourism spot          | N/A                                | N/A                  |
+| Method   | Endpoint       | Description                    | Request Param                              | Request Body         |
+| :------- | :------------- | :----------------------------- | :----------------------------------------- | :------------------- |
+| `GET`    | `/wisata`      | Get all tourism spots          | `nama` (optional), `kategoriId` (optional) | N/A                  |
+| `GET`    | `/wisata/{id}` | Get details of a specific spot | N/A                                        | N/A                  |
+| `POST`   | `/wisata`      | Create a new tourism spot      | N/A                                        | `WisataRequest` JSON |
+| `PUT`    | `/wisata/{id}` | Update an existing spot        | N/A                                        | `WisataRequest` JSON |
+| `DELETE` | `/wisata/{id}` | Delete a tourism spot          | N/A                                        | N/A                  |
+
+#### Categories (Kategori)
+
+| Method   | Endpoint         | Description                 | Request Param | Request Body           |
+| :------- | :--------------- | :-------------------------- | :------------ | :--------------------- |
+| `GET`    | `/kategori`      | Get all categories          | N/A           | N/A                    |
+| `GET`    | `/kategori/{id}` | Get details of a category   | N/A           | N/A                    |
+| `POST`   | `/kategori`      | Create a new category       | N/A           | `KategoriRequest` JSON |
+| `PUT`    | `/kategori/{id}` | Update an existing category | N/A           | `KategoriRequest` JSON |
+| `DELETE` | `/kategori/{id}` | Delete a category           | N/A           | N/A                    |
 
 ### Example Request Body (JSON)
 
@@ -88,7 +98,18 @@ The application will start on port `8080`.
   "hargaTiket": 5000.0,
   "urlGambar": "https://example.com/gedungsate.jpg",
   "latitude": -6.9024812,
-  "longitude": 107.61881
+  "longitude": 107.61881,
+  "kategoriId": 1
+}
+```
+
+**POST /api/v1/kategori**
+
+```json
+{
+  "nama": "Sejarah",
+  "deskripsi": "Tempat wisata bersejarah",
+  "urlGambar": "https://example.com/sejarah.jpg"
 }
 ```
 

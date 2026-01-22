@@ -14,9 +14,17 @@ public class KategoriService {
 
     private final KategoriRepository kategoriRepository;
 
-    public id.pariwisata.jelajahbandung.dto.PagedResponse<KategoriResponse> getAllKategori(int page, int size) {
+    public id.pariwisata.jelajahbandung.dto.PagedResponse<KategoriResponse> getAllKategori(String search, int page,
+            int size) {
         org.springframework.data.domain.Pageable pageable = org.springframework.data.domain.PageRequest.of(page, size);
-        org.springframework.data.domain.Page<Kategori> kategoriPage = kategoriRepository.findAll(pageable);
+        org.springframework.data.domain.Page<Kategori> kategoriPage;
+
+        if (search != null && !search.isEmpty()) {
+            kategoriPage = kategoriRepository.findByNamaContainingIgnoreCase(search, pageable);
+        } else {
+            kategoriPage = kategoriRepository.findAll(pageable);
+        }
+
         org.springframework.data.domain.Page<KategoriResponse> responsePage = kategoriPage
                 .map(KategoriResponse::fromEntity);
         return id.pariwisata.jelajahbandung.dto.PagedResponse.fromPage(responsePage);

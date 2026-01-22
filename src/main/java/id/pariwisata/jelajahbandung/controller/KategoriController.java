@@ -19,11 +19,12 @@ public class KategoriController {
 
     @GetMapping
     public ResponseEntity<ApiResponse<PagedResponse<KategoriResponse>>> getAllKategori(
+            @RequestParam(required = false) String search,
             @RequestParam(defaultValue = "0") int page,
             @RequestParam(defaultValue = "10") int size) {
         return ResponseEntity
                 .ok(ApiResponse.success("Data kategori successfully collected",
-                        kategoriService.getAllKategori(page, size)));
+                        kategoriService.getAllKategori(search, page, size)));
     }
 
     @GetMapping("/{id}")
