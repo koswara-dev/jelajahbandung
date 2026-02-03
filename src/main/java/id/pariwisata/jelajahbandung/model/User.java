@@ -39,6 +39,28 @@ public class User implements UserDetails {
     @Column(name = "url_foto")
     private String urlFoto;
 
+    @Builder.Default
+    @Column(name = "is_email_verified", nullable = false)
+    private boolean isEmailVerified = false;
+
+    private String otp;
+
+    @Column(name = "otp_expiration")
+    private LocalDateTime otpExpiration;
+
+    @Column(name = "phone_number", unique = true)
+    private String phoneNumber;
+
+    @Builder.Default
+    @Column(name = "is_phone_verified", nullable = false)
+    private boolean isPhoneVerified = false;
+
+    @Column(name = "phone_otp")
+    private String phoneOtp;
+
+    @Column(name = "phone_otp_expiration")
+    private LocalDateTime phoneOtpExpiration;
+
     @CreationTimestamp
     @Column(name = "created_at", updatable = false)
     private LocalDateTime createdAt;

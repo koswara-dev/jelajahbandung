@@ -4,6 +4,7 @@ import id.pariwisata.jelajahbandung.dto.ApiResponse;
 import id.pariwisata.jelajahbandung.dto.AuthResponse;
 import id.pariwisata.jelajahbandung.dto.LoginRequest;
 import id.pariwisata.jelajahbandung.dto.RegisterRequest;
+import id.pariwisata.jelajahbandung.dto.VerifyEmailRequest;
 import id.pariwisata.jelajahbandung.service.AuthService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -29,5 +30,12 @@ public class AuthController {
     public ResponseEntity<ApiResponse<AuthResponse>> authenticate(
             @RequestBody LoginRequest request) {
         return ResponseEntity.ok(ApiResponse.success("Login successful", service.authenticate(request)));
+    }
+
+    @PostMapping("/verify-email")
+    public ResponseEntity<ApiResponse<Object>> verifyEmail(
+            @RequestBody VerifyEmailRequest request) {
+        service.verifyEmail(request);
+        return ResponseEntity.ok(ApiResponse.success("Email verified successfully"));
     }
 }

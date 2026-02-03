@@ -1,9 +1,6 @@
 package id.pariwisata.jelajahbandung.controller;
 
-import id.pariwisata.jelajahbandung.dto.ApiResponse;
-import id.pariwisata.jelajahbandung.dto.PagedResponse;
-import id.pariwisata.jelajahbandung.dto.UserRequest;
-import id.pariwisata.jelajahbandung.dto.UserResponse;
+import id.pariwisata.jelajahbandung.dto.*;
 import id.pariwisata.jelajahbandung.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -55,5 +52,23 @@ public class UserController {
     public ResponseEntity<ApiResponse<Void>> deleteUser(@PathVariable Long id) {
         userService.deleteUser(id);
         return ResponseEntity.ok(ApiResponse.success("User deleted successfully"));
+    }
+
+    @PostMapping("/{id}/otp/send")
+    @PreAuthorize("hasAnyAuthority('ADMIN', 'USER')")
+    public ResponseEntity<ApiResponse<Void>> sendPhoneOtp(
+            @PathVariable Long id,
+            @RequestBody(required = false) PhoneRequest request) {
+        userService.sendPhoneOtp(id, request != null ? request.getPhoneNumber() : null);
+        return ResponseEntity.ok(ApiResponse.success("OTP sent successfully"));
+    }
+
+    @PostMapping("/{id}/otp/verify")
+    @PreAuthorize("hasAnyAuthority('ADMIN', 'USER')")
+    public ResponseEntity<ApiResponse<Void>> verifyPhoneOtp(
+            @PathVariable Long id,
+            @RequestBody VerifyPhoneRequest request) {
+        userService.verifyPhoneOtp(id, request.getOtp());
+        return ResponseEntity.ok(ApiResponse.success("Phone verified successfully"));
     }
 }
