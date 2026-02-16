@@ -39,4 +39,4 @@ jobs:
             docker stop jelajahbandung || true
             docker rm jelajahbandung || true
             docker pull kosdev92/jelajahbandung:1.0
-            docker run -dp 8080:8080 --name jelajahbandung -e "SPRING_PROFILES_ACTIVE=dev" -e SPRINGDOC_SWAGGERUI_ENABLED=false -e TZ=Asia/Jakarta -v $(pwd)/uploads:/app/uploads --cpus=1 --memory=1g kosdev92/jelajahbandung:1.0
+            docker run -dp 8080:8080 --name jelajahbandung --network jc-network -e "SPRING_PROFILES_ACTIVE=dev" -e SPRINGDOC_SWAGGERUI_ENABLED=false -e TZ=Asia/Jakarta -v $(pwd)/uploads:/app/uploads --cpus=1 --memory=1g kosdev92/jelajahbandung:1.0
