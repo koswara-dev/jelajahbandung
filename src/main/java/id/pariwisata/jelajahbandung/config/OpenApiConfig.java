@@ -14,29 +14,29 @@ import java.util.List;
 @Configuration
 public class OpenApiConfig {
 
-    @Bean
-    public OpenAPI jelajahBandungOpenAPI() {
-        final String securitySchemeName = "bearerAuth";
-        
-        Server productionServer = new Server();
-        productionServer.setUrl("https://devops.juaracoding.com/kelompok2");
-        productionServer.setDescription("Production Server via NGINX");
+        @Bean
+        public OpenAPI jelajahBandungOpenAPI() {
+                final String securitySchemeName = "bearerAuth";
 
-        Server localServer = new Server();
-        localServer.setUrl("http://localhost:8080");
-        localServer.setDescription("Local Development Server");
+                Server productionServer = new Server();
+                productionServer.setUrl("https://devops.juaracoding.com/kelompok1");
+                productionServer.setDescription("Production Server via NGINX");
 
-        return new OpenAPI()
-                .info(new Info().title("Jelajah Bandung API")
-                        .description("API Documentation for Jelajah Bandung Application.")
-                        .version("v0.0.1"))
-                .servers(List.of(productionServer, localServer))
-                .addSecurityItem(new SecurityRequirement().addList(securitySchemeName))
-                .components(new Components()
-                        .addSecuritySchemes(securitySchemeName, new SecurityScheme()
-                                .name(securitySchemeName)
-                                .type(SecurityScheme.Type.HTTP)
-                                .scheme("bearer")
-                                .bearerFormat("JWT")));
-    }
+                Server localServer = new Server();
+                localServer.setUrl("http://localhost:8080");
+                localServer.setDescription("Local Development Server");
+
+                return new OpenAPI()
+                                .info(new Info().title("Jelajah Bandung API")
+                                                .description("API Documentation for Jelajah Bandung Application.")
+                                                .version("v0.0.1"))
+                                .servers(List.of(productionServer, localServer))
+                                .addSecurityItem(new SecurityRequirement().addList(securitySchemeName))
+                                .components(new Components()
+                                                .addSecuritySchemes(securitySchemeName, new SecurityScheme()
+                                                                .name(securitySchemeName)
+                                                                .type(SecurityScheme.Type.HTTP)
+                                                                .scheme("bearer")
+                                                                .bearerFormat("JWT")));
+        }
 }

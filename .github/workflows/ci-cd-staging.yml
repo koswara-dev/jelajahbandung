@@ -65,7 +65,6 @@ jobs:
             docker run -d \
               -p 8091:8080 \
               --name jelajahbandung-staging \
-              --network jc-network \
               -e "SPRING_PROFILES_ACTIVE=staging" \
               -e "TZ=Asia/Jakarta" \
               -v $(pwd)/uploads:/app/uploads \
