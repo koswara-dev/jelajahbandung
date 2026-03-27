@@ -1,4 +1,4 @@
-name: CI/CD Jelajah Bandung
+name: CI/CD Jelajah Bandung Staging
 
 on:
   push:
